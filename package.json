@@ -1,0 +1,26 @@
+{
+  "name": "itsnotmydish-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PTHy/ItsNotMyDish-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PTHy/ItsNotMyDish-server/issues"
+  },
+  "homepage": "https://github.com/PTHy/ItsNotMyDish-server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "sequelize": "^4.41.1"
+  }
+}
