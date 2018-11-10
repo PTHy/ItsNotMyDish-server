@@ -12,6 +12,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    content: {
+      field: 'content',
+      type: DataTypes.STRING(255),
+    },
+    dishImage: {
+      field: 'dish_image',
+      type: DataTypes.STRING(50),
+    },
     userId: {
       field: 'user_id',
       type: DataTypes.STRING(50),
@@ -23,4 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     }
   })
+
+  return BoardLog
 }

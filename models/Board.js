@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Board = sequelize.defind('Board', {
+  const Board = sequelize.define('Board', {
     idx: {
       field: 'idx',
       type: DataTypes.INTEGER,
