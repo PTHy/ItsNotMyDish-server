@@ -1,6 +1,9 @@
 const controller = require('./board.controller');
 const routes = require('express').Router();
 
-routes.get('/:lat/:lng');
+routes.use('/:board_idx/comment');
+routes.get('/:lat/:lng',controller.getBoardList);
+routes.post('/',controller.createBoard);
+
 
 module.exports = routes

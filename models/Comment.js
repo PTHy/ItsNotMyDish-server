@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const BoardLog = sequelize.define('BoardLog', {
+  const Comment = sequelize.define('comment', {
     idx: {
       field: 'idx',
       type: DataTypes.INTEGER,
@@ -31,9 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     }
   }, {
-    tableName: 'board_log',
+    tableName: 'comment',
     timestamps: false,
   });
 
-  return BoardLog
+  return Comment
 }
