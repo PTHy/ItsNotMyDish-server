@@ -35,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+  }, {
+    tableName: 'board',
+    timestamps: false,
   });
 
 

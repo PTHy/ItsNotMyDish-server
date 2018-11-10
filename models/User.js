@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
@@ -32,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+  }, {
+    tableName: 'user',
+    timestamps: false,
   });
 
   User.associate = (models) => {
@@ -39,6 +44,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
     }); 
   };
+
+  User.login = (data) => User.findOne({
+    where: {
+      id: data.id,
+      password: data.password,
+    }
+  })
 
   return User;
 }

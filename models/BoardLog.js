@@ -30,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       defaultValue: DataTypes.NOW,
     }
-  })
+  }, {
+    tableName: 'board_log',
+    timestamps: false,
+  });
 
   return BoardLog
 }

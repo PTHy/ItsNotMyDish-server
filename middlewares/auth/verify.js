@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const secret = process.env.JWT_SECRET
+const secret = process.env.SECRET
 const verifyMiddleware = (req, res, next) => {
   
   if (!req.headers['x-access-token']) {

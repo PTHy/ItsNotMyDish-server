@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('./user.controller')
-const verifyMiddleware = require('../../middlewares/auth/verify')
 
-router.use('/',verifyMiddleware)
+router.post('/register', controller.register);
+router.post('/login',controller.login);
 
 module.exports = router
