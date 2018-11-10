@@ -35,6 +35,16 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  Comments.associate = (models) => {
+    models.Comments.belongsTo(models.Board, {
+      foreignKey: 'boardIdx',
+    });
+
+    models.Comments.belongsTo(models.User, {
+      foreignKey: 'userId',
+    });
+  }
+
   Comments.getComments = (boardIdx) => Comments.findAll({
     where: {
       boardIdx

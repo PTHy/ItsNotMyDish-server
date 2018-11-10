@@ -45,6 +45,18 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  Board.associate = (models) => {
+    models.Board.belongsTo(models.User,{
+      foreignKey: 'userId',
+    });
+    models.Board.hasMany(models.Comments, {
+      foreignKey: 'boardIdx',
+    });
+    models.Board.hasMany(models.Log, {
+      foreignKey: 'boardIdx',
+    });
+  }
+
   Board.getBoard = (boardIdx) => Board.findOne({
     where: {
       idx: boardIdx,

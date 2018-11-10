@@ -47,7 +47,15 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     models.User.hasMany(models.Board, {
       foreignKey: 'userId',
-    }); 
+    });
+    
+    models.User.hasMany(models.Log, {
+      foreignKey: 'userId',
+    });
+
+    models.User.hasMany(models.Comments, {
+      foreignKey: 'userId'
+    });
   };
 
   User.login = (data) => User.findOne({

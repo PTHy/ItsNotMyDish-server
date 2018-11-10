@@ -3,11 +3,37 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const changeCase = require('change-object-case');
 
+  /*
+    GET localhost:3000/user/:user_id
+  */
+
+  exports.getUser = async (req, res) => {
+    const { userId } = changeCase.camelKeys(req.params);
+
+    const user = await models.User.findByPk(userId);
+
+    if (!user) {
+      res.status(404).json({
+        status: 404,
+        message: "유저가 존재하지 않습니다",
+      });
+
+      return;
+    }
+
+    res.json({
+      status: 200,
+      message: "유저 정보가 조회되었습니다",
+      data: user,
+    });
+  }
+
+
 exports.register = async (req, res) => {
 
   /*
     POST localhost:3000/user/register 
-    BODY id, password, name, email, lat, lng
+    BODY id, password, name, email, lat, lng, contact
   */
 
   const data = req.body;
@@ -133,34 +159,5 @@ exports.login = async (req,res) => {
         message: "유저 정보 수정에 실패하였습니다",
       });
     }
-
-
-
   }
-  
-  /*
-    GET localhost:3000/user/:user_id
-  */
-
-  exports.getUser = async (req, res) => {
-    const { userId } = changeCase.camelKeys(req.params);
-    
-    const user = await models.User.findByPk(userId);
-
-    if (!user) {
-      res.status(404).json({
-        status: 404,
-        message: "유저가 존재하지 않습니다",
-      });
-  
-      return;
-    }
-
-    res.json({
-      status: 200,
-      message: "유저 정보가 조회되었습니다",
-      data: user,
-    });
-  }
-
 }
