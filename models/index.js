@@ -36,11 +36,11 @@ Object.keys(models).forEach((modelName) => {
 });
 
 // 스키마 동기화
-// sequelize.sync({ force: true }).then(() => {
-//   console.log('Schema is synchronized');
-// }).catch((err) => {
-//   console.log('An error has occurred: ', err);
-// });
+ sequelize.sync({ force: true }).then(() => {
+   console.log('Schema is synchronized');
+ }).catch((err) => {
+   console.log('An error has occurred: ', err);
+ });
 
 models.sequelize = sequelize;
 models.Sequelize = sequelize;
