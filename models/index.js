@@ -3,12 +3,14 @@ const path = require('path');
 const Sequelize = require('sequelize');
 // sequelize 연결 설정
 
+const config = require('../config/database');
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER_NAME,
-  process.env.DB_PASSWORD, {
-    host: process.env.HOST,
-    dialect: process.env.DIALECT,
+  config.dbName,
+  config.dbUserName,
+  config.dbPassword, {
+    host: config.dbHost,
+    dialect: config.dialect,
     logging: true,
     pool: {
       max: 5,
