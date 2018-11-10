@@ -29,4 +29,17 @@ exports.getBoardList = async (req, res) => {
       data: sendData,
     });
   })
-} 
+}
+
+exports.createBoard = async (req, res) => {
+  const { userId } = req.decoded;
+  const { content, dish_image, lat, lng } = req.data;
+
+  try {
+    models.Board.create({
+      content,
+      user_id: userId,
+
+    })
+  }
+}

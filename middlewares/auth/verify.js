@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET
 const verifyMiddleware = (req, res, next) => {
-  
+
   if (!req.headers['x-access-token']) {
     return res.send({
       Code: 0,
@@ -28,7 +28,7 @@ const verifyMiddleware = (req, res, next) => {
   //decoded에 idx에 user의 idx값 저장됨
 
   verify.then((decoded) => {
-    req.user = decoded
+    req.decoded = decoded
     next()
   }).catch(onError)
 }
