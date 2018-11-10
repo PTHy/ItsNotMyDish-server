@@ -3,11 +3,13 @@ const secret = process.env.SECRET
 const verifyMiddleware = (req, res, next) => {
 
   if (!req.headers['x-access-token']) {
-    return res.send({
-      Code: 0,
-      Desc: 'not logged in'
+    return res.status(404).json({
+      status: 404,
+      message: "토큰이 없습니다"
     });
   }
+
+  const token = req.headers["x-access-token"]
 
   const verify = new Promise(
     (resolve, reject) => {
@@ -19,9 +21,9 @@ const verifyMiddleware = (req, res, next) => {
   )
 
   const onError = (error) => {
-    res.send({
-      Code: 1,
-      Desc: error.message
+    res.status(500).json({
+      status: 500,
+      Message: "토큰검증에서 오류가 발생하였습니다"
     })
   }
 

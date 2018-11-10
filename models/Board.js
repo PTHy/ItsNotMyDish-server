@@ -18,8 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     uploadDate: {
       field: 'upload_date',
-      type: DataTypes.STRING(50),
+      type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+    },
+    isFinish: { 
+      field: 'is_finish',
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     dishImage: {
       field: 'dish_image',
@@ -38,6 +43,26 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'board',
     timestamps: false,
+  });
+
+  Board.getBoard = (boardIdx) => Board.findOne({
+    where: {
+      idx: boardIdx,
+    },
+    raw: true
+  });
+
+  Board.getBoardList = (models) => Board.findAll({
+    attributes: [
+      [models.sequelize.literal('(SELECT name FROM user WHERE user.id = board.user_id)'), 'user_name'],
+      'content',
+      'upload_date',
+      'is_finish',
+      'dish_image',
+      'lat',
+      'lng',
+    ],
+    raw: true,
   });
 
 

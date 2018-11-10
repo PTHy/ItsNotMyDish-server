@@ -1,6 +1,7 @@
 const models = require('../../models');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const changeCase = require('change-object-case');
 
 exports.register = async (req, res) => {
 
@@ -52,9 +53,9 @@ function EncryptPassword (password) {
 exports.login = async (req,res) => {
   const data = req.body;
 
-  const isExist = await models.User.findByPk(data.id);
+  const user = await models.User.findByPk(data.id);
 
-  if (!isExist) {
+  if (!user) {
     res.status(404).json({
       status: 404,
       message: "유저가 존재하지 않습니다",
@@ -65,9 +66,9 @@ exports.login = async (req,res) => {
 
   data.password = await EncryptPassword(data.password);
 
-  const user = await models.User.login(data)
+  const login = await models.User.login(data)
   
-  if(!user) {
+  if(!login) {
     res.status(400).json({
       status: 400,
       message: "비밀번호가 올바르지 않습니다",  
@@ -79,7 +80,7 @@ exports.login = async (req,res) => {
 
   try {
     const token = await  jwt.sign({
-                          _id : user._id,
+                          userId : user.id,
                         },
                         secret,
                         {
@@ -91,7 +92,8 @@ exports.login = async (req,res) => {
     res.json({
       status: 200,
       message: "로그인에 성공하였습니다",
-      token
+      token,
+      data: user,
     })
   } catch (error) {
     console.log(error.message);
@@ -100,4 +102,65 @@ exports.login = async (req,res) => {
       message: "알수없는 오류",
     })
   }
+
+  exports.updateUserInfo = async (req, res) => {
+    const { userId } = req.decoded;
+    const data = req.body;
+
+    const user = await models.User.findByPk(userId);
+  
+    if (!user) {
+      res.status(404).json({
+        status: 404,
+        message: "유저가 존재하지 않습니다",
+      });
+  
+      return;
+    }
+
+    try {
+      const user = models.user.update(data)
+
+      res.json({
+        status: 200,
+        message: "유저 정보 수정에 성공하였습니다",
+        data
+      });
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({
+        status: 500,
+        message: "유저 정보 수정에 실패하였습니다",
+      });
+    }
+
+
+
+  }
+  
+  /*
+    GET localhost:3000/user/:user_id
+  */
+
+  exports.getUser = async (req, res) => {
+    const { userId } = changeCase.camelKeys(req.params);
+    
+    const user = await models.User.findByPk(userId);
+
+    if (!user) {
+      res.status(404).json({
+        status: 404,
+        message: "유저가 존재하지 않습니다",
+      });
+  
+      return;
+    }
+
+    res.json({
+      status: 200,
+      message: "유저 정보가 조회되었습니다",
+      data: user,
+    });
+  }
+
 }

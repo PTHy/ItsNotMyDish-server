@@ -1,9 +1,11 @@
+const router = require('express').Router();
 const controller = require('./board.controller');
-const routes = require('express').Router();
+const authMiddleware = require('./../../middlewares/auth/verify');
+const comment = require('./comment');
 
-routes.use('/:board_idx/comment');
-routes.get('/:lat/:lng',controller.getBoardList);
-routes.post('/',controller.createBoard);
+router.use('/comment',comment);
+router.get('/:lat/:lng',controller.getBoardList);
+router.post('/',authMiddleware,controller.createBoard);
 
 
-module.exports = routes
+module.exports = router

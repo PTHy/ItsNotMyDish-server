@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define('comment', {
+  const Comments = sequelize.define('Comments', {
     idx: {
       field: 'idx',
       type: DataTypes.INTEGER,
@@ -27,13 +27,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     uploadDate: {
       field: 'upload_date',
-      type: DataTypes.STRING(50),
+      type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     }
   }, {
-    tableName: 'comment',
+    tableName: 'comments',
     timestamps: false,
   });
 
-  return Comment
+  Comments.getComments = (boardIdx) => Comments.findAll({
+    where: {
+      boardIdx
+    }
+  });
+
+  return Comments
 }
