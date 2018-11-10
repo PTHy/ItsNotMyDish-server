@@ -7,5 +7,5 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     }
-  })
+  })fhnfffbfb
 }
