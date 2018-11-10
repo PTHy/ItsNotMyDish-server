@@ -6,13 +6,37 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-<<<<<<< HEAD
     },
-    sdfsfdsdfsdfsfdfs
-  })
+    userId: {
+      field: 'user_id',
+      type: DataTypes.STRING(50),
+      allowNull: false, 
+    },
+    content: {
+      field: 'content',
+      type: DataTypes.STRING(255),
+    },
+    uploadDate: {
+      field: 'upload_date',
+      type: DataTypes.STRING(50),
+      defaultValue: DataTypes.NOW,
+    },
+    dishImage: {
+      field: 'dish_image',
+      type: DataTypes.STRING(50),
+    },
+    lat: {
+      field: 'lat',
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    lng: {
+      field: 'lng',
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+  });
+
+
+  return Board;
 }
-=======
-    }
-  })fhnfffbfb
-}
->>>>>>> d402a7d553dc1745ba91a943a8bc619b2eb339bc

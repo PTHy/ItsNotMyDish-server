@@ -13,20 +13,32 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(128),
       allowNull: false,
     },
-    email: {
-      field: 'email',
-      type: DataTypes.STRING(50),
-    },
     name: {
       field: 'name',
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    location: {
-      field: 'location',
+    email: {
+      field: 'email',
+      type: DataTypes.STRING(50),
+    },
+    lat: {
+      field: 'lat',
       type: DataTypes.STRING(50),
       allowNull: false,
-    }
-    
+    },
+    lng: {
+      field: 'lng',
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
   });
+
+  User.associate = (models) => {
+    models.User.hasMany(models.Board, {
+      foreignKey: 'userId',
+    }); 
+  };
+
+  return User;
 }
