@@ -57,11 +57,19 @@ module.exports = (sequelize, DataTypes) => {
     });
   }
 
+  Board.soldOut = (boardIdx) => Board.update({
+    isFinish: 1,
+  }, {
+    where: {
+      idx: boardIdx
+    },
+  });
+
   Board.getBoard = (boardIdx) => Board.findOne({
     where: {
       idx: boardIdx,
     },
-    raw: true
+    raw: true,
   });
 
   Board.getBoardList = (models) => Board.findAll({

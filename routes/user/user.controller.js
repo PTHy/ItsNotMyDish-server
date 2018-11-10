@@ -129,6 +129,10 @@ exports.login = async (req,res) => {
     })
   }
 
+  /*
+    GET localhost:3000/:user_id
+  */
+
   exports.updateUserInfo = async (req, res) => {
     const { userId } = req.decoded;
     const data = req.body;

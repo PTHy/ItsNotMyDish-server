@@ -2,7 +2,7 @@ const models = require('../../../models');
 const changeCase = require('change-object-case');
 
 /*
-  GET localhost:3000/board/:board_idx/comment
+  GET localhost:3000/board/comment/:board_idx
 */
 
 exports.getComments = async (req, res) => {

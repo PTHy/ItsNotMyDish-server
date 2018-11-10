@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+    isAccept: {
+      field: 'is_accept',
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     exchangeTime: {
       field: 'exchange_time',
       type: DataTypes.DATE,
@@ -37,6 +42,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
     });
   }
+
+  Log.getLog = (userId) => Log.findAll({
+    where: {
+      userId
+    },
+    raw: true,
+  });
 
   return Log;
 }
