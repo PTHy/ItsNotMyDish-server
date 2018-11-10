@@ -8,7 +8,20 @@ exports.getBoardList = async (req, res) => {
   let sendData = [];
   const setDistance = new Promise((resolve, reject) => {
     for(let board in boards) {
-      
+
     }
   })
-} 
+}
+
+exports.createBoard = async (req, res) => {
+  const { userId } = req.decoded;
+  const { content, dish_image, lat, lng } = req.data;
+
+  try {
+    models.Board.create({
+      content,
+      user_id: userId,
+
+    })
+  }
+}
