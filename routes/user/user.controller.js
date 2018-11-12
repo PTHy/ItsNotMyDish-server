@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const changeCase = require('change-object-case');
 
   /*
-    GET localhost:3000/user/:user_id
+    GET localhost:3000/user/profile/:user_id
   */
 
   exports.getUser = async (req, res) => {
@@ -28,6 +28,31 @@ const changeCase = require('change-object-case');
     });
   }
 
+  /*
+    GET localhost:3000/user/profile
+  */
+
+ exports.getMyProfile = async (req, res) => {
+  const { userId } = req.decoded;
+
+  const user = await models.User.findByPk(userId);
+
+  if (!user) {
+    res.status(404).json({
+      status: 404,
+      message: "유저가 존재하지 않습니다",
+    });
+
+    return;
+  }
+
+  res.json({
+    status: 200,
+    message: "유저 정보가 조회되었습니다",
+    data: user,
+  });
+}
+
 
 exports.register = async (req, res) => {
 
@@ -39,7 +64,9 @@ exports.register = async (req, res) => {
   const data = req.body;
   console.log(`data: ${data}`);
 
-  const user = await models.User.find({ id: data.id })
+  const user = await models.User.find({ 
+    where: { id: data.id } 
+  });
 
   if (user) {
     res.status(400).json({

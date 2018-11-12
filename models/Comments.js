@@ -46,9 +46,18 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Comments.getComments = (boardIdx) => Comments.findAll({
+    attributes: [
+      'idx',
+      'board_idx',
+      'content',
+      'dish_image',
+      'user_id',
+      'upload_date'
+    ],
     where: {
-      boardIdx
-    }
+      board_idx: boardIdx
+    },
+    raw: true,
   });
 
   return Comments

@@ -7,9 +7,9 @@ const changeCase = require('change-object-case');
 
 exports.getComments = async (req, res) => {
   console.log(req.params);
-  const { boardIdx } = changeCase.camelKeys(req.params)
+  const { board_idx } = req.params
   
-  const board = await models.Board.getBoard(boardIdx);
+  const board = await models.Board.getBoard(board_idx);
 
   if(!board) {
     res.status(404).json({
@@ -21,7 +21,7 @@ exports.getComments = async (req, res) => {
   }
 
   try {
-    const comments = await models.Comments.getComments(boardIdx);
+    const comments = await models.Comments.getComments(board_idx);
 
     res.json({
       status: 200,

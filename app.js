@@ -5,6 +5,7 @@ require('dotenv').config()
 const port = process.env.SERVER_PORT
 const app = express()
 const router = require('./routes')
+const path = require('path')
 
 //CORS 설정
 
@@ -12,7 +13,7 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
-app.use(serve('./img'));
+app.use('/img',express.static(path.join(__dirname,'./img')));
 
 app.use('/',router)
 
